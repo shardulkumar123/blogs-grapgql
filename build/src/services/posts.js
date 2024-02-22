@@ -9,11 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const db_1 = require("../lib/db");
 class PostService {
     constructor() {
         this.createPost = (payload) => __awaiter(this, void 0, void 0, function* () {
             const { slug, title, body, author, authorId } = payload;
-            // const post = 
+            return yield db_1.prismaClient.post.create({
+                data: {
+                    slug,
+                    title,
+                    body,
+                    author,
+                    authorId,
+                },
+            });
         });
     }
 }
