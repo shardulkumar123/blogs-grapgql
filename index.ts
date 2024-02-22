@@ -8,19 +8,20 @@ import UserService from "./src/services/users";
 const init_app = async () => {
   const app = express();
   const Port = Number(process.env.PORT) || 8001;
-  app.use(cors());
-  app.use(bodyParser.json());
+  // app.use(cors());
+  // app.use(bodyParser.json());
 
   app.use(
     "/graphql",
-    // cors<cors.CorsRequest>(),
-    // bodyParser.json(),
+    cors<cors.CorsRequest>(),
+    bodyParser.json(),
+
     expressMiddleware(await gqlServer(), {
       context: async ({ req }) => {
         try {
           const token = req.headers["token"];
-          const user = await UserService.verifyUserToken(token as string);
-          console.log("user", user);
+          // const user = await UserService.verifyUserToken(token as string);
+          // console.log("user", user);
           return "";
         } catch (error) {
           throw new Error("Something went wrong due to this error: " + error);
