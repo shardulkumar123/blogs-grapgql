@@ -60,9 +60,7 @@ class UserService {
 
     if (!decryptUserPassword) throw new Error("Invalid Credentials");
 
-    return jwt.sign(payload, `${process.env.JWT_SECRET}`, {
-      expiresIn: "7d",
-    });
+    return jwt.sign(payload, `${process.env.JWT_SECRET}`);
   };
 
   public static verifyUserToken = async (token: string) => {
@@ -73,15 +71,15 @@ class UserService {
     return prismaClient.user.findMany({});
   };
 
-  // public static getCurrentLoginUser = async () => {
-  //   console.log("test");
-  //   return {};
-  //   //   prismaClient.user.findUnique({
-  //   //     where: {
-  //   //       email: context.email,
-  //   //     },
-  //   //   });
-  // };
+  public static getCurrentLoginUser = async () => {
+    console.log("test");
+    return {};
+    //   prismaClient.user.findUnique({
+    //     where: {
+    //       email: context.email,
+    //     },
+    //   });
+  };
 }
 
 export default UserService;

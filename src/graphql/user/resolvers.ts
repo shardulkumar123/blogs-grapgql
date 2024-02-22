@@ -11,10 +11,11 @@ const queries = {
     });
     return createLogin;
   },
-  // getCurrentLoginUser: async (_: any, parameters: any, context: any) => {
-  //   console.log("context", context);
-  //   return context.user;
-  // },
+  getCurrentLoginUser: async () => {
+    // console.log("context", context);
+    // return {};
+    throw new Error("error from resolvers to get current login user");
+  },
 };
 
 const mutations = {

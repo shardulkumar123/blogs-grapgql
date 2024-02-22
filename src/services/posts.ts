@@ -6,19 +6,18 @@ export interface CreatePostPayload {
   slug: string;
   title: string;
   body: string;
-  author: any;
   authorId: string;
 }
 
 class PostService {
-  createPost = async (payload: CreatePostPayload) => {
-    const { slug, title, body, author, authorId } = payload;
-    return await prismaClient.post.create({
+  public static createPost = async (payload: CreatePostPayload) => {
+    const { slug, title, body, authorId } = payload;
+    // const checkUser = UserService.
+    const post = await prismaClient.post.create({
       data: {
         slug,
         title,
         body,
-        author,
         authorId,
       },
     });
