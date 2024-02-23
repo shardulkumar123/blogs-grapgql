@@ -11,10 +11,13 @@ const queries = {
     });
     return createLogin;
   },
-  getCurrentLoginUser: async () => {
-    // console.log("context", context);
-    // return {};
-    throw new Error("error from resolvers to get current login user");
+  getCurrentLoginUser: async (_: any, paramenter: any, context: any) => {
+    try {
+      const getUser = await UserService.getCurrentLoginUser(context.email);
+      return getUser;
+    } catch (error) {
+      throw new Error("error from resolvers to get current login user");
+    }
   },
 };
 

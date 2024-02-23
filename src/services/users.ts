@@ -64,21 +64,20 @@ class UserService {
   };
 
   public static verifyUserToken = async (token: string) => {
-    return jwt.verify(token, `${process.env.JWT_SECRET}`);
+    const checktoken = await jwt.verify(token, `${process.env.JWT_SECRET}`);
+    return checktoken;
   };
 
   public static getUser = () => {
     return prismaClient.user.findMany({});
   };
 
-  public static getCurrentLoginUser = async () => {
-    console.log("test");
-    return {};
-    //   prismaClient.user.findUnique({
-    //     where: {
-    //       email: context.email,
-    //     },
-    //   });
+  public static getCurrentLoginUser = async (email: string) => {
+    return await prismaClient.user.findUnique({
+      where: {
+        email,
+      },
+    });
   };
 }
 

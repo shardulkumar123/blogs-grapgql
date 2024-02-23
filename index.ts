@@ -19,10 +19,8 @@ const init_app = async () => {
     expressMiddleware(await gqlServer(), {
       context: async ({ req }) => {
         try {
-          const token = req.headers["token"];
-          // const user = await UserService.verifyUserToken(token as string);
-          // console.log("user", user);
-          return "";
+          const token = req.headers.token;
+          return await UserService.verifyUserToken(token as string);
         } catch (error) {
           throw new Error("Something went wrong due to this error: " + error);
         }
