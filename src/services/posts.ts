@@ -13,6 +13,7 @@ class PostService {
   public static createPost = async (payload: CreatePostPayload) => {
     const { slug, title, body, authorId } = payload;
     // const checkUser = UserService.
+    console.log("payload", payload);
     const post = await prismaClient.post.create({
       data: {
         slug,
@@ -21,6 +22,8 @@ class PostService {
         authorId,
       },
     });
+    console.log("post", post);
+    return;
   };
 }
 

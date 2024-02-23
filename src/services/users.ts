@@ -1,6 +1,7 @@
-import { prismaClient } from "../lib/db";
+import { GraphQLError } from "graphql";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { prismaClient } from "../lib/db";
 
 export interface CreateUserPayload {
   firstName: string;
@@ -64,8 +65,13 @@ class UserService {
   };
 
   public static verifyUserToken = async (token: string) => {
-    const checktoken = await jwt.verify(token, `${process.env.JWT_SECRET}`);
-    return checktoken;
+    // console.log("token", token);
+    try {
+      const decodedToken = jwt.verify(token, `${process.env.JWT_SECRET}`);
+      return decodedToken;
+    } catch (error: any) {
+      throw new Error(error);
+    }
   };
 
   public static getUser = () => {

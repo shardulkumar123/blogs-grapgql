@@ -13,6 +13,8 @@ const mutations = {
       body,
       authorId,
     });
+    console.log("post", post);
+    return "post created";
   },
 };
 

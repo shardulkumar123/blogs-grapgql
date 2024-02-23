@@ -4,13 +4,12 @@ const queries = {
   getUsers: async () => {
     return await UserService.getUser();
   },
-  getLoginToken: async (_: any, { email, password }: CreateUserPayload) => {
-    const createLogin = await UserService.createUserLoginToken({
-      email,
-      password,
-    });
-    return createLogin;
-  },
+  // getLoginToken: async (_: any, { email, password }: CreateUserPayload) => {
+  //   return await UserService.createUserLoginToken({
+  //     email,
+  //     password,
+  //   });
+  // },
   getCurrentLoginUser: async (_: any, paramenter: any, context: any) => {
     try {
       const getUser = await UserService.getCurrentLoginUser(context.email);
@@ -32,17 +31,16 @@ const mutations = {
       email,
       password,
     });
-    console.log("createUser", createUser);
     return createUser.id;
   },
 
-  // createLoginToken: async (_: any, { email, password }: CreateUserPayload) => {
-  //   const createLogin = await UserService.createUserLoginToken({
-  //     email,
-  //     password,
-  //   });
-  //   return createLogin;
-  // },
+  createLoginToken: async (_: any, { email, password }: CreateUserPayload) => {
+    const createLogin = await UserService.createUserLoginToken({
+      email,
+      password,
+    });
+    return createLogin;
+  },
 };
 
 export const resolvers = { queries, mutations };
