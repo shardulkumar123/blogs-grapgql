@@ -83,6 +83,9 @@ class UserService {
       where: {
         email,
       },
+      include: {
+        Post: true,
+      },
     });
   };
 }

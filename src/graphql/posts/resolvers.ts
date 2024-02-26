@@ -9,6 +9,7 @@ const queries = {
 
       if (findUser) {
         const post = await PostService.getPostByUser(findUser.id);
+        console.log("post", post);
         return post;
       }
     } catch (error) {

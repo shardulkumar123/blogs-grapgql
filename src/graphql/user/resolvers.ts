@@ -7,6 +7,7 @@ const queries = {
   getCurrentLoginUser: async (_: any, paramenter: any, context: any) => {
     try {
       const getUser = await UserService.getCurrentLoginUser(context.email);
+      console.log("getUser", getUser);
       return getUser;
     } catch (error) {
       throw new Error("error from resolvers to get current login user");
