@@ -16,7 +16,7 @@ export interface CreateUserLoginToken {
 }
 
 class UserService {
-  private static findUserByEmail = (email: string) => {
+  public static findUserByEmail = (email: string) => {
     return prismaClient.user.findUnique({
       where: {
         email,
@@ -65,8 +65,8 @@ class UserService {
   };
 
   public static verifyUserToken = async (token: string) => {
-    // console.log("token", token);
     try {
+      if (!token) return "";
       const decodedToken = jwt.verify(token, `${process.env.JWT_SECRET}`);
       return decodedToken;
     } catch (error: any) {
@@ -74,7 +74,7 @@ class UserService {
     }
   };
 
-  public static getUser = () => {
+  public static getUsers = () => {
     return prismaClient.user.findMany({});
   };
 

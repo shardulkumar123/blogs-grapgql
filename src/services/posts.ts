@@ -12,9 +12,7 @@ export interface CreatePostPayload {
 class PostService {
   public static createPost = async (payload: CreatePostPayload) => {
     const { slug, title, body, authorId } = payload;
-    // const checkUser = UserService.
-    console.log("payload", payload);
-    const post = await prismaClient.post.create({
+    return await prismaClient.post.create({
       data: {
         slug,
         title,
@@ -22,8 +20,19 @@ class PostService {
         authorId,
       },
     });
-    console.log("post", post);
-    return;
+  };
+
+  public static getAllPost = async () => {
+    return prismaClient.post.findMany();
+  };
+
+  public static getPostByUser = async (authorId: string) => {
+    console.log("authorId", authorId);
+    return prismaClient.post.findMany({
+      where: {
+        authorId,
+      },
+    });
   };
 }
 

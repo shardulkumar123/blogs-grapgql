@@ -2,14 +2,8 @@ import UserService, { CreateUserPayload } from "../../services/users";
 
 const queries = {
   getUsers: async () => {
-    return await UserService.getUser();
+    return await UserService.getUsers();
   },
-  // getLoginToken: async (_: any, { email, password }: CreateUserPayload) => {
-  //   return await UserService.createUserLoginToken({
-  //     email,
-  //     password,
-  //   });
-  // },
   getCurrentLoginUser: async (_: any, paramenter: any, context: any) => {
     try {
       const getUser = await UserService.getCurrentLoginUser(context.email);

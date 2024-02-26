@@ -12,32 +12,28 @@ const init_app = async () => {
   const app = express();
   const Port = Number(process.env.PORT) || 8001;
 
-  app.use(cors());
-  app.use(bodyParser.json());
-
   app.use(
     "/graphql",
-    // cors<cors.CorsRequest>(),
-    // bodyParser.json(),
+    cors<cors.CorsRequest>(),
+    bodyParser.json(),
 
     //Getting problem here with auth
     expressMiddleware(await gqlServer(), {
       context: async ({ req }) => {
-        // console.log("req.body", req.body);
         const operationName = req.body.operationName;
-        console.log("operationName", operationName);
         try {
-          if (
-            req.body.operationName === "CreateUser" ||
-            req.body.operationName === "CreateLoginToken"
-          ) {
-            return {};
+          if (!req.headers.authorization) {
+            if (
+              operationName === "CreateUser" ||
+              operationName === "CreateLoginToken"
+            ) {
+              return {};
+            }
           }
 
-          const token = req.headers.authorization || "";
-          if (!token) {
-            throw new Error("Authorization token missing");
-          }
+          const token = req.headers.authorization?.split(" ")[1];
+
+          // Verify user with token
           const user = await UserService.verifyUserToken(token as string);
           return user;
         } catch (error) {
