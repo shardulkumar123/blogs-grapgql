@@ -3,8 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import { expressMiddleware } from "@apollo/server/express4";
-import { gqlServer } from "./graphql";
-import UserService from "./services/users";
+import { gqlServer } from "./src/graphql";
+import UserService from "./src/services/users";
 
 dotenv.config();
 
