@@ -6,7 +6,6 @@ const queries = {
   getPostByUser: async (_: any, parameter: any, context: any) => {
     try {
       const findUser = await UserService.findUserByEmail(context.email);
-      console.log("findUser", findUser);
 
       if (findUser) {
         const post = await PostService.getPostByUser(findUser.id);

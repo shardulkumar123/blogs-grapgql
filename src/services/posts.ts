@@ -27,7 +27,6 @@ class PostService {
   };
 
   public static getPostByUser = async (authorId: string) => {
-    console.log("authorId", authorId);
     return prismaClient.post.findMany({
       where: {
         authorId,

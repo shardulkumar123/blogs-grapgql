@@ -37,7 +37,6 @@ const init_app = async () => {
           const user = await UserService.verifyUserToken(token as string);
           return user;
         } catch (error) {
-          console.error("Error in GraphQL context middleware: ", error);
           throw new Error("Internal server error");
         }
       },
